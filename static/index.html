@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090c10">
+  <title>TestPilot — Web Security Overview</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#dashboard"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M3 22.5 45 3 29 45l-7-15.2L3 22.5Zm19.2 7.3L45 3 18 25.2"/></svg></span><span>Test<span class="brand-accent">Pilot</span></span><h1 class="sr-only">TestPilot</h1></a>
+      <nav class="side-nav">
+        <a class="active" href="#dashboard"><span aria-hidden="true">⌂</span> Dashboard</a>
+        <a href="#scan"><span aria-hidden="true">⌕</span> Scan Website</a>
+        <a href="#history"><span aria-hidden="true">▤</span> Scan History</a>
+        <a href="#accessibility"><span aria-hidden="true">♿</span> Accessibility Testing</a>
+        <a href="#quality-checks"><span aria-hidden="true">◉</span> Quality Checks</a>
+      </nav>
+      <details class="more-tools"><summary><span aria-hidden="true">✣</span> More Tools</summary><nav aria-label="Available scan tools"><a href="#httpx-report-card">HTTPX Response</a><a href="#security-headers-panel">Security Audit</a><a href="#vulnerabilities-panel">Vulnerabilities</a><a href="#accessibility">Browser + WCAG</a><a href="#quality-checks">API Contract</a><a href="#website-scan-result">Gemma Summary</a></nav></details>
+      <div class="sidebar-note"><span class="shield" aria-hidden="true">⬡</span><strong>Safer Web for Everyone</strong><p>Find security risks. Improve accessibility. Build with confidence.</p></div>
+    </aside>
+    <main class="main-content" id="dashboard">
+      
+      <section class="welcome"><div><p class="eyebrow">Welcome back</p><h1>Web Security Overview</h1><p>Scan for vulnerabilities and accessibility issues to build a safer, more inclusive web.</p></div><div class="date-label" id="today-label"></div></section>
+      <section class="scan-panel panel" id="scan" aria-labelledby="scan-title">
+        <div class="tabs"><a class="selected" href="#scan-title">Website Scan</a><a href="#accessibility">Accessibility Scan</a></div>
+        <h2 id="scan-title" class="sr-only">Website Scan</h2>
+        <form id="website-scan-form">
+          <label class="scan-url"><span aria-hidden="true">↗</span><span class="sr-only">Website URL to scan</span><input id="scan-url" type="url" placeholder="Enter a website URL (e.g. https://example.com)" required></label>
+          <button id="start-scan" class="danger-button" type="submit"><span aria-hidden="true">▷</span> Start Scan</button>
+          <div class="scan-options"><label><input id="enable-security" type="checkbox" checked> Security checks</label><label><input id="enable-active" type="checkbox"> Run inert XSS and access-control probes</label><label class="consent-label"><input id="scan-authorized" type="checkbox"> I own this site or have permission (required for active probes)</label><label><input id="enable-a11y" type="checkbox" checked> Accessibility scan (WCAG)</label><small id="probe-authorization-hint" class="probe-authorization-hint" hidden></small><details class="advanced-options"><summary>Advanced scan options</summary><label><input id="enable-contract" type="checkbox" checked> Discover and test OpenAPI (GET only)</label><small>Schemathesis requires authorization, tests GET operations only, and runs only when a same-origin OpenAPI schema is found.</small></details></div>
+        </form>
+        <p id="scan-status" class="hint" role="status" aria-live="polite">Choose checks and start a scan. Only assess websites you are authorized to test.</p>
+      </section>
+      
+      <section class="metrics" aria-label="Scan statistics">
+        <article class="metric-card"><span class="metric-icon">▤</span><div><p>Total Scans</p><strong id="metric-total">0</strong></div><span class="metric-trend">Saved</span><svg class="metric-sparkline" viewBox="0 0 68 28" aria-hidden="true"><polyline points="1,25 12,19 21,22 31,10 39,15 48,6 57,9 67,2"/></svg></article>
+        <article class="metric-card"><span class="metric-icon">⚠</span><div><p>Vulnerabilities</p><strong id="metric-vulnerabilities">0</strong></div><span class="metric-trend">Potential</span><svg class="metric-sparkline" viewBox="0 0 68 28" aria-hidden="true"><polyline points="1,24 10,20 18,23 27,13 37,16 46,9 55,12 67,3"/></svg></article>
+        <article class="metric-card"><span class="metric-icon">⬡</span><div><p>Security Issues</p><strong id="metric-security">0</strong></div><span class="metric-trend">Review</span><svg class="metric-sparkline" viewBox="0 0 68 28" aria-hidden="true"><polyline points="1,23 9,18 17,20 26,11 35,14 43,7 54,10 67,2"/></svg></article>
+        <article class="metric-card"><span class="metric-icon">♿</span><div><p>Accessibility Issues</p><strong id="metric-a11y">0</strong></div><span class="metric-trend">WCAG</span><svg class="metric-sparkline green" viewBox="0 0 68 28" aria-hidden="true"><polyline points="1,4 10,8 18,6 28,17 37,12 46,22 55,17 67,25"/></svg></article>
+      </section>
+      <div class="reports-grid">
+        <section class="panel report-panel" id="httpx-report-card"><div class="section-heading"><div><p class="eyebrow">HTTPX</p><h2>Website Response</h2></div></div><div id="httpx-report" class="report-content"><p class="empty-state">HTTP status, headers, response time, and body checks will appear here.</p></div></section>
+        <section class="panel report-panel security-category-panel" id="security-headers-panel"><div class="section-heading"><div><p class="eyebrow">Security policy</p><h2>Security Headers</h2></div></div><div id="security-headers-report" class="report-content"><p class="empty-state">Header checks will appear here.</p></div></section>
+        <section class="panel report-panel security-category-panel" id="cookie-security-panel"><div class="section-heading"><div><p class="eyebrow">Session protection</p><h2>Cookie Security</h2></div></div><div id="cookie-security-report" class="report-content"><p class="empty-state">Cookie flag checks will appear here.</p></div></section>
+        <section class="panel report-panel security-category-panel" id="exposure-panel"><div class="section-heading"><div><p class="eyebrow">Public files</p><h2>Exposed Resources</h2></div></div><div id="exposure-report" class="report-content"><p class="empty-state">HEAD-only exposure checks will appear here.</p></div></section>
+        <section class="panel report-panel security-category-panel" id="active-probes-panel"><div class="section-heading"><div><p class="eyebrow">Authorized probes</p><h2>Active Security Probes</h2></div></div><div id="active-probes-report" class="report-content"><p class="empty-state">Optional XSS and access-control probe status will appear here.</p></div></section>
+        <section class="panel report-panel" id="accessibility"><div class="section-heading"><div><p class="eyebrow">WCAG + Browser</p><h2>Playwright Browser + axe</h2></div><a href="#scan">Scan</a></div><div id="accessibility-report" class="report-content"><p class="empty-state">Target page, keyboard, JavaScript, and axe results appear here.</p></div></section>
+      </div>
+      <section class="panel vulnerabilities-panel" id="vulnerabilities-panel" aria-labelledby="vulnerabilities-title"><div class="section-heading"><div><p class="eyebrow">Security + accessibility findings</p><h2 id="vulnerabilities-title">Vulnerabilities Found <span id="vulnerability-count" class="a11y-engine">0 items</span></h2></div></div><p class="hint">Each item below comes from the latest scan of your submitted website. Automated findings are indicators to review, not proof of exploitability.</p><div id="vulnerabilities-list" class="vulnerability-grid"><p class="empty-state">Run a scan to see each potential security or accessibility issue in its own card.</p></div></section>
+      <section class="panel quality-panel" id="quality-checks" aria-labelledby="quality-checks-title"><div class="section-heading"><div><p class="eyebrow">One target · combined results</p><h2 id="quality-checks-title">Quality Checks <span id="test-group-count" class="a11y-engine">8 target groups</span></h2></div><span class="hint">All tools use the URL submitted above</span></div><div id="quality-results" class="tool-cards"><p class="empty-state">Submit a target URL to run HTTPX, security, Playwright + axe, Schemathesis (when available), and Gemma reporting.</p></div><details class="quality-details"><summary>View all eight target check groups</summary><div id="test-results" class="test-results"><p class="empty-state">Individual HTTP, security, and accessibility checks will appear here.</p></div></details></section>
+      <section id="website-scan-result" class="panel hidden" aria-live="polite" aria-label="Combined website scan result"></section>
+      <section class="panel history-panel" id="history"><div class="section-heading"><div><p class="eyebrow">Saved locally</p><h2>Recent Scans</h2></div><button id="refresh-scans" class="secondary-button" type="button">Refresh</button></div><div class="table-wrap" tabindex="0" role="region" aria-label="Recent website scan history"><table><thead><tr><th>#</th><th>URL</th><th>Scan type</th><th>Date &amp; time</th><th>Results</th><th>Status</th><th>Action</th></tr></thead><tbody id="scan-history"><tr><td colspan="7" class="empty-state">No website scans yet.</td></tr></tbody></table></div></section>
+      <footer>TestPilot scans your submitted website · HTTPX · Security · Playwright + axe · Schemathesis (if OpenAPI is available)</footer>
+    </main>
+  </div>
+  <script src="/static/app.js"></script>
+</body></html>

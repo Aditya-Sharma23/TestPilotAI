@@ -1,0 +1,8 @@
+# Schemathesis recognizes that /api/run may reject an otherwise well-formed
+# URL because its SSRF protection blocks private targets and DNS failures.
+[[operations]]
+include-name = "POST /api/run"
+checks.positive_data_acceptance.expected-statuses = ["2xx", "3xx", "400", "401", "403", "404", "409", "429", "5xx"]
+
+[generation]
+max-examples = 20

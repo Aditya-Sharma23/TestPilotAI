@@ -1,0 +1,14 @@
+{
+  "name": "testpilot-ai-quality-checks",
+  "private": true,
+  "scripts": {
+    "test:a11y": "playwright test",
+    "test:a11y:install": "playwright install chromium",
+    "test:all": "playwright test && .\\.venv\\Scripts\\python.exe -m pytest -q"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.56.1"
+  }
+}
+
